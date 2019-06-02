@@ -18,37 +18,24 @@ public class GuuInterp implements Runnable {
 	static LinkedList<String> stackTrace = new LinkedList<>();
 
 	public static void main(String[] args) {
+
 		GuuInterp program = new GuuInterp();
 
-		List<String> lists = new ArrayList<>();
 
-		try (BufferedReader bufferedReader = new BufferedReader(new FileReader("/Users/ogaltsov/IdeaProjects/untitled/src/main/resources/code"))) {
-
-			String line;
-			while ((line = bufferedReader.readLine()) != null) {
-				lists.add(line);
-			}
-
-
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
+		//читаем файл по строкам
+		final List<String> lines = readCodeFromFile("/Users/ogaltsov/IdeaProjects/untitled/src/main/resources/code");
 
 		//достаем токены
-
-		final List<String> tokens = lists.stream()
+		final List<String> tokens = lines.stream()
 				.flatMap(line -> Stream.of(line.split("\\s+")))
 				.filter(line -> !line.isBlank())
 				.collect(Collectors.toList());
 
 		//группируем токены по процедурам
-
 		Set<List<String>> procedures = parseProcedures(tokens);
 
-		//сгрупировываем по по операторам
-
+		//группируем по по операторам
 		//sub name/oper/structure
-
 		List<Procedure> collect = procedures.stream().map(procedure -> {
 			Set<List<String>> operators = parseOperators(procedure);
 
@@ -57,16 +44,32 @@ public class GuuInterp implements Runnable {
 
 		}).collect(Collectors.toList());
 
-		////////////////////////////////////////////////////////////////
-
+		//упаковываем процедуры
 		collect.forEach(p -> program.procedures.put(p.name, p));
 
+		//запускаем
 		program.run();
 
 
 
 		System.out.println();
 
+	}
+
+	private static List<String> readCodeFromFile(String path) {
+		List<String> lists = new ArrayList<>();
+		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
+
+			String line;
+			while ((line = bufferedReader.readLine()) != null) {
+				lists.add(line);
+			}
+
+
+		} catch (IOException ex) {
+			throw new IllegalStateException();
+		}
+		return lists;
 	}
 
 	private static Set<List<String>> parseProcedures(List<String> tokens) {
