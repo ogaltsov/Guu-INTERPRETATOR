@@ -1,0 +1,14 @@
+sub main
+set a 1
+cal foo
+print a
+print b
+
+sub foo
+set a 2
+cal boo
+set a 4
+
+sub boo
+set b 10
+set a 3
