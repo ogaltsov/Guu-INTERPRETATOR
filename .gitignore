@@ -1,0 +1,30 @@
+/target/*
+target/*
+/classes/*
+/out/*
+/bin/*
+/lib/*
+/src-generated/*
+/generated/*
+/resources-generated/*
+.repository
+CHANGELOG.md
+README.md
+# Logs
+logs
+*.log*
+*.bak
+**/.DS_Store
+
+# IDE preferences and settings
+.idea
+.project
+*.settings*
+.classpath
+*.iml
+.externalToolBuilders
+*.ipr
+*.iws
+*.ids
+/.designer/
+atlassian-ide-plugin.xml
