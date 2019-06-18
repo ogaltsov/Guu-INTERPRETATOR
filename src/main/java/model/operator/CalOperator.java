@@ -2,6 +2,7 @@ package model.operator;
 
 import config.GuuInterpretatorApp;
 import lombok.Data;
+import model.Program;
 import model.procedure.Procedure;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class CalOperator extends Operator {
 	@Override
 	public void run() {
 
-		Procedure procedure = GuuInterpretatorApp.getProcedures().get(functionName);
+		Procedure procedure = Program.getProcedures().get(functionName);
 		if (procedure == null) {
 			throw new IllegalStateException();
 		}

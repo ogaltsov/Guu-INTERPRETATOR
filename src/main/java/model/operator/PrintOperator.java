@@ -2,6 +2,7 @@ package model.operator;
 
 import config.GuuInterpretatorApp;
 import lombok.Data;
+import model.Program;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class PrintOperator extends Operator {
 
 	@Override
 	public void run() {
-		System.out.println(GuuInterpretatorApp.getVariables().get(var));
+		System.out.println(Program.getVariables().get(var));
 //		System.out.println(line+"| "+String.join(" ", tokens));
 
 	}

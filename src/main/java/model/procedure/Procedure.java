@@ -1,8 +1,8 @@
 package model.procedure;
 
-import config.GuuInterpretatorApp;
 import config.Runnable;
 import lombok.Data;
+import model.Program;
 import model.operator.Operator;
 
 import java.util.ArrayList;
@@ -25,8 +25,8 @@ public class Procedure implements Runnable {
 
 	@Override
 	public void run() {
-		GuuInterpretatorApp.getStackTrace().add(name);
+		Program.getStackTrace().add(name);
 		operators.forEach(Operator::run);
-		GuuInterpretatorApp.getStackTrace().removeLast();
+		Program.getStackTrace().removeLast();
 	}
 }

@@ -2,6 +2,7 @@ package model.operator;
 
 import config.GuuInterpretatorApp;
 import lombok.Data;
+import model.Program;
 
 import java.util.List;
 
@@ -19,6 +20,6 @@ public class SetOperator extends Operator {
 	@Override
 	public void run() {
 //		System.out.println(line+"| "+String.join(" ", tokens));
-		GuuInterpretatorApp.getVariables().put(var, value);
+		Program.getVariables().put(var, value);
 	}
 }
